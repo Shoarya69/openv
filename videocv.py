@@ -1,19 +1,18 @@
 import cv2
-import os
-from dotenv import load_dotenv
+from cam import ip
+from circluar_img import circle
 
-load_dotenv()
-
-cap = cv2.VideoCapture(os.getenv("ip_video"))
+cap = cv2.VideoCapture(ip())
 
 while True:
     ret, frame = cap.read()
     if not ret:
         print("Could not read fram")
         break
-    
-    cv2.imshow("webcam Feed",frame)
-
+    cir = circle(frame)
+    rotated_90 = cv2.rotate(cir, cv2.ROTATE_90_CLOCKWISE)
+    cv2.imshow("webcam Feed",cir)
+    cv2.imshow("per ",rotated_90)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         print("quting")
         break

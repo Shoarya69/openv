@@ -11,7 +11,8 @@ while True:
         print("Somting went wrong")
         break
     filp = cv2.flip(frame,1)
-    cv2.imshow("Camera",filp)
+    blur = cv2.GaussianBlur(filp,(5,5),0)
+    cv2.imshow("Camera",blur)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         print("quting")
         break
